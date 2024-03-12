@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChemiCalc</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+
+<body>
+    <div class="box-container">
+
+        <div>
+            <form action="/results/" method="post">
+                <label for="formula" style="color: #ffffff;">Chemical Formula:</label>
+                <input type="text" id="formula" name="formula" required>
+                <br>
+                <input type="submit" value="Calculate">
+            </form>
+        </div>
+
+        <br>
+
+        <div class="container">
+            <p style="color: #2c3e50;"><strong>{{ formula_txt }}</strong></p>
+            <table style="width:100%; border: 1px solid #2c3e50;">
+                <tr style="background-color: #b4f5b4;">
+                    <th>Element</th>
+                    <th>Count</th>
+                    <th>Percentage</th>
+                </tr>
+                {% for item in percentage_composition %}
+                <tr>
+                    <td>{{ item['element_name'] }}</td>
+                    <td>{{ item['count'] }}</td>
+                    <td>{{ item['percentage'] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <p style="color: #2c3e50;">{{ moles }}</p>
+            <p style="color: #2c3e50;">{{ molar_mass }}</p>
+        </div>
+
+    </div>
+</body>
+
+</html>

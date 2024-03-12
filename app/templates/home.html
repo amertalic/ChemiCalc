@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChemiCalc</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+
+    <div class="box-container">
+        <a id="docs-link" href="" target="_blank">Docs</a>
+        <br><br>
+        <form action="/results/" method="post">
+            <label for="formula" style="color: #ffffff;">Chemical Formula:</label>
+            <input type="text" id="formula" name="formula" required>
+            <br>
+            <input type="submit" value="Calculate">
+        </form>
+        {% if validation_results %}
+            <p style="color: #ffffff;"><strong>{{ validation_results }}</strong></p>
+            <label for="formula" style="color: #ffffff;">Submit a valid formula, try again!</label>
+        {% endif %}
+    </div>
+
+</body>
+</html>
+
