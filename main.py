@@ -22,5 +22,5 @@ async def open_browser():
 
 if __name__ == "__main__":
     # asyncio.run(open_browser())
-    uvicorn.run("main:app", host="127.0.0.1", port=9000, log_level="info", reload=True, workers=1)
+    uvicorn.run("main:app", port=3000, log_level="info", reload=False, workers=1)
 
