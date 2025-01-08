@@ -12,11 +12,16 @@ templates = Jinja2Templates(directory="app/templates")
 
 @router.post("/", response_class=HTMLResponse)
 def read_results(request: Request, formula: str = Form(...)):
-    chimi_instance = ChemiCalculator(formula)
-    if not chimi_instance.element:
+    try:
+        chimi_instance = ChemiCalculator(formula)
+    except ValueError:
         context = {"request": request, "name": "ChemiCalc",
-                   "validation_results": f"Invalid formula submitted {chimi_instance.unicode}"
-                   }
+                   "validation_results": f"Invalid formula submitted: {formula}"}
+        return templates.TemplateResponse("home.html", context)
+
+    if not getattr(chimi_instance, 'element', None):  # Check if 'element' exists and is not None
+        context = {"request": request, "name": "ChemiCalc",
+                   "validation_results": f"Invalid formula submitted: {chimi_instance.unicode}"}
         return templates.TemplateResponse("home.html", context)
 
     molar_mass = f"Molar mass: {chimi_instance.formula_weight:.2f} g/mol"
